@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import _ from 'lodash';
+import $ = require('jquery');
+import _ = require('lodash');
 import '../css/main.css';
 
 $('body').append('<p>Holberton Dashboard</p>');

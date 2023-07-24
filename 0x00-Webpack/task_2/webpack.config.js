@@ -1,59 +1,37 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './js/dashboard_main.js',
+  entry: {
+    main: path.resolve(__dirname, './js/dashboard_main.js'),
+  },
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
+  },
+  performance: {
+    maxAssetSize: 1000000,
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpeg|jpg|gif|svg)$/i,
         type: 'asset/resource',
-        generator: {
-          filename: 'assets/[name][ext]',
-        },
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
         use: [
-          {
-            loader: ImageMinimizerPlugin.loader,
+	  {
+	    loader: ['file-loader', 'image-webpack-loader'],
             options: {
-              severityError: 'warning', // (default)
-              minimizerOptions: {
-                plugins: [
-                  ['imagemin-webp', { quality: 75 }],
-                  ['imagemin-svgo', { removeViewBox: false }],
-                  ['imagemin-gifsicle', { optimizationLevel: 5 }],
-                  ['imagemin-mozjpeg', { quality: 75, progressive: true }],
-                  ['imagemin-pngquant', { quality: [0.6, 0.8] }],
-                ],
-              },
-            },
-          },
-        ],
+	      bypassOnDebug: true,
+	      disable: true,
+	    },
+	  },
+	],
       },
     ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'main.css',
-    }),
-  ],
-  resolve: {
-    alias: {
-      jquery: 'jquery/src/jquery',
-      lodash: 'lodash-es',
-    },
   },
 };
 
