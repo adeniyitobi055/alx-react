@@ -49,5 +49,11 @@ module.exports = {
       filename: 'main.css',
     }),
   ],
+  resolve: {
+    alias: {
+      jquery: 'jquery/src/jquery',
+      lodash: 'lodash-es',
+    },
+  },
 };
 
