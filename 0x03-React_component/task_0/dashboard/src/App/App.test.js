@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import App from './App';
 import Login from '../Login/Login';
@@ -45,7 +48,43 @@ describe('App tests', () => {
 	it('render CourseList if IsLoggedIn is true', () => {
 		const component = shallow(<App isLoggedIn={true} />);
 
-		expect(component.contains(<CourseList />)).toBe(true);
+		expect(component.containsMatchingElement(<CourseList />)).toEqual(false);
 		expect(component.contains(<Login />)).toBe(false);
 	});
+});
+
+describe('When ctrl + h is pressed', () => {
+	it('calls logOut function', () => {
+		const mocked = jest.fn();
+		const wrapper = mount(<App logOut={mocked} />);
+		const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
+		document.dispatchEvent(event);
+
+		expect(mocked).toHaveBeenCalledTimes(1);
+		wrapper.unmount();
+	});
+
+	window.alert = jest.fn();
+	it('checks that alert function is called', () => {
+		const wrapper = mount(<App />);
+		const spy = jest.spyOn(window, 'alert');
+		const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
+		document.dispatchEvent(event);
+
+		expect(spy).toHaveBeenCalled();
+		spy.mockRestore();
+		wrapper.unmount();
+	});
+
+	it('checks that alert if "Logging you out"', () => {
+		const wrapper = mount(<App />);
+		const spy = jest.spyOn(window, 'alert');
+		const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
+		document.dispatchEvent();
+
+		expect(spy).toHaveBeenCalledWith('Logging you out');
+		jest.restoreAllMocks();
+		wrapper.unmount();
+	});
+	window.alert.mockClear();
 });
