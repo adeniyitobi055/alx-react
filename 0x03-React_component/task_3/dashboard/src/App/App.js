@@ -1,0 +1,63 @@
+import React from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import CourseList from '../CourseList/CourseList';
+import Notifications from '../Notifications/Notifications';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import './App.css';
+import PropTypes, { bool } from 'prop-types';
+import { getLatestNotification } from '../utils/utils';
+import BodySection from '../BodySection/BodySection';
+
+class App extends React.Component {
+  listCourses = [
+    { id: 1, name: 'ES6', credit: 60 },
+    { id: 2, name: 'Webpack', credit: 20 },
+    { id: 3, name: 'React', credit: 40 },
+];
+
+  listNotifications = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: getLatestNotification() },
+];
+
+  render() {
+    return (
+      <React.Fragment>
+        <div className='App'>
+            <div className='heading-section'>
+            <Notifications listNotifications={this.Notifications} />
+            <Header />
+          </div>
+          {this.props.isLoggedIn ? (
+            <BodySectionWithMarginBottom title='Course list'>
+              <CourseList listCourses={this.listCourses}/>
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title='Log in to continue'>
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title='News from the School'>
+            <p>
+            The company itself is a very successful company.
+            </p>
+          </BodySection>
+          <Footer />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+
+App.defaultProps = {
+  isLoggedIn: false,
+};
+
+App.protoType = {
+  isLoggedIn: PropTypes.bool,
+};
+
+export default App;
