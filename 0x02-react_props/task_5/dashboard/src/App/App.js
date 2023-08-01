@@ -33,12 +33,12 @@ function App({ isLoggedIn }) {
   );
 }
 
-App.protoType = {
-  isLoggedIn: PropTypes.bool,
-};
-
 App.defaultProps = {
   isLoggedIn: false,
+};
+
+App.protoType = {
+  isLoggedIn: PropTypes.bool,
 };
 
 export default App;

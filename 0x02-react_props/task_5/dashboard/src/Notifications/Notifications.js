@@ -17,7 +17,12 @@ const Notifications = ({ displayDrawer, listNotifications }) => {
 			<ul>
 			  {listNotifications && listNotifications.length > 0 ? (
 			    listNotifications.map(({ id, html, type, value }) => (
-				  <NotificationItem key={id} type={type} value={value} html={html} />
+				  <NotificationItem
+				  	key={id}
+					type={type}
+					value={value}
+					html={html}
+				  />
 				))
 			  ) : (
 					<div className='notification-header'>
