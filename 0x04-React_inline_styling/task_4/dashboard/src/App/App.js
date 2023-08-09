@@ -70,18 +70,18 @@ componentWillUnmount() {
     return (
       <React.Fragment>
         <div className={css(styles.App)}>
-            <div className={css(styles['heading-section'])}>
+          <div className={css(styles['heading-section'])}>
             <Notifications listNotifications={this.Notifications} />
-            <Header />
+              <Header />
           </div>
           {this.props.isLoggedIn ? (
             <BodySectionWithMarginBottom title='Course list'>
               <CourseList listCourses={this.listCourses}/>
             </BodySectionWithMarginBottom>
           ) : (
-                <BodySectionWithMarginBottom title='Log in to continue'>
-                  <Login />
-                </BodySectionWithMarginBottom>
+            <BodySectionWithMarginBottom title='Log in to continue'>
+              <Login />
+            </BodySectionWithMarginBottom>
           )}
           <BodySection title='News from the School'>
             <p>

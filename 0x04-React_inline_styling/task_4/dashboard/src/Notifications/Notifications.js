@@ -81,6 +81,10 @@ class Notifications extends React.Component {
 									<div className={css(styles['notification-header'])}>
 										<NotificationItem value='No new notification for now' />
 										<button
+											style={{
+												border: 'none',
+												background: 'none',
+											}}
 											aria-label='Close'
 											onClick={console.log('Close button has been clicked')}
 										>

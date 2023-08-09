@@ -22,7 +22,7 @@ describe('rendering components', () => {
 
 		wrapper.setProps({ type: 'default', value: 'test' });
 		expect(wrapper.html()).toEqual(
-			'<li data-notification-type="default">test</li>'
+			'<li class="default_1tsdo2i" data-notification-type="default">test</li>'
 		);
 	});
 

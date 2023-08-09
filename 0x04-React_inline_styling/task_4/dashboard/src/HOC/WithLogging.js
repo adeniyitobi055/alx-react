@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-const WithLogging = WrappedComponent => {
-	const getDisplayName = WrappedComponent =>
-		WrappedComponent.displayName || WrappedComponent.name || 'Component';
+const WithLogging = ({ WrappedComponent }) => {
+	const getDisplayName = (WrappedComponent) => {
+			return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+		};
 
 	WithLogging.displayName = `WithLogging(${getDisplayName(WrappedComponent)})`;
 
